@@ -14,3 +14,5 @@ set_target_properties(kernel PROPERTIES
     LINK_FLAGS "-T ${CMAKE_CURRENT_SOURCE_DIR}/linker.ld -nostdlib"
     OUTPUT_NAME "kernel.elf"
 )
+
+include(cmake/iso.cmake)
