@@ -7,8 +7,11 @@ A monolithic core that will contain everything necessary for a minimal operating
 # How to build:
 
 > Dependencies:
+
 > CMake 3.25+
+
 > C compiler (GCC for Linux, currently unavailable for other OS)
+
 > [NASM compiler](https://www.nasm.us/)
 
 /TODO
