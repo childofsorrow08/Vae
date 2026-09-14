@@ -6,7 +6,7 @@ include(cmake/prerequisites.cmake)
 project(kernel C ASM_NASM)
 
 add_executable(kernel 
-    "${CMAKE_SOURCE_DIR}/src/boot.nasm"
+    "${CMAKE_SOURCE_DIR}/src/boot.asm"
     "${CMAKE_SOURCE_DIR}/src/kernel.c"
 )
 
