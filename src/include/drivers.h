@@ -5,6 +5,12 @@
     extern uint8_t inb(uint16_t port);
 #endif
 
+/*
+ * VGA driver is now deprecated due to 
+ * framebuffer use.
+ */
+
+/* 
 #if defined(VGA)
 
 #include <stdint.h>
@@ -43,5 +49,6 @@ extern void vga_putchar(char c);
 extern void vga_write(const char* str);
 
 #endif
+*/
 
 #endif

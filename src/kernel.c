@@ -1,4 +1,3 @@
-#define VGA
 #include <drivers.h>
 
 #define PRINT
