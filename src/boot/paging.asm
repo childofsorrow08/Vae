@@ -25,3 +25,5 @@ section .text
         cmp ecx, 512
         jl .map_loop
         ret
+
+section .note.GNU-stack noalloc noexec nowrite progbits

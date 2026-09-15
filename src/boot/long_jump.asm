@@ -21,3 +21,5 @@ section .text
         or eax, (1 << 31) | (1 << 0)
         mov cr0, eax
         ret
+
+section .note.GNU-stack noalloc noexec nowrite progbits

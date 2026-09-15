@@ -13,3 +13,5 @@ page_pd:   resb 4096
 stack_bottom:
     resb 16384
 stack_top:
+
+section .note.GNU-stack noalloc noexec nowrite progbits

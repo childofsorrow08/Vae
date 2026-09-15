@@ -7,9 +7,14 @@
 #include <func.h>
 
 void _main(void) {
-    vga_init();
+    /*
+     * don't works with multiboot2
+     * because i using framebuffer now
+     *
+     * vga_init();
+     * klog("Initializing kernel...");
+     */
     
-    klog("Initializing kernel...");
 
     while (1) {
         __asm__ volatile("hlt");
