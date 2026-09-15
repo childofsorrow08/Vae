@@ -1,6 +1,10 @@
-*.code-workspace
+# build
 build
 
+# IDE
+*.code-workspace
+
+# helpful scripts
 test.sh
 rebuild.sh
 recruit.sh
