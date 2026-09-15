@@ -1,12 +1,10 @@
 cmake_minimum_required(VERSION 3.25)
 
 include(cmake/flags.cmake)
-
 include(cmake/prerequisites.cmake)
 project(kernel C ASM_NASM)
 
 add_executable(kernel 
-
     # root
     "${CMAKE_SOURCE_DIR}/src/boot.asm"
     "${CMAKE_SOURCE_DIR}/src/kernel.c"
@@ -19,9 +17,12 @@ add_executable(kernel
 
     # drivers
     "${CMAKE_SOURCE_DIR}/src/drivers/vga.c"
+    "${CMAKE_SOURCE_DIR}/src/drivers/port.c"
 
     # functions
     "${CMAKE_SOURCE_DIR}/src/func/print.c"
+    "${CMAKE_SOURCE_DIR}/src/func/sys_time.c"
+    "${CMAKE_SOURCE_DIR}/src/func/klog.c"
 )
 
 target_include_directories(kernel PRIVATE

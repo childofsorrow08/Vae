@@ -1,6 +1,10 @@
 #if !defined(DRIVERS_H)
 #define DRIVERS_H
 
+#if defined(PORT)
+    extern uint8_t inb(uint16_t port);
+#endif
+
 #if defined(VGA)
 
 #include <stdint.h>

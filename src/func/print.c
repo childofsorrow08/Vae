@@ -37,10 +37,7 @@ static void print_int(long long value, int base, int uppercase) {
     }
 }
 
-void print(const char* format, ...) {
-    va_list parameters;
-    va_start(parameters, format);
-
+void vprint(const char* format, va_list parameters) {
     for (const char* traverse = format; *traverse != '\0'; traverse++) {
         if (*traverse != '%') {
             vga_putchar(*traverse);
@@ -49,37 +46,53 @@ void print(const char* format, ...) {
 
         traverse++; // Parsing '%'
         switch (*traverse) {
+
+            // char
             case 'c': {
                 char c = (char) va_arg(parameters, int);
                 vga_putchar(c);
                 break;
             }
+
+            // string
             case 's': {
                 const char* s = va_arg(parameters, const char*);
                 vga_write(s ? s : "(null)");
                 break;
             }
+
+            // decimal
             case 'd':
+
+            // int
             case 'i': {
                 int val = va_arg(parameters, int);
                 print_int(val, 10, 0);
                 break;
             }
+
+            // unsigned int
             case 'x': {
                 unsigned int val = va_arg(parameters, unsigned int);
                 print_int(val, 16, 0);
                 break;
             }
+
+            // void
             case 'p': {
                 void* ptr = va_arg(parameters, void*);
                 vga_write("0x");
                 print_int((unsigned long long) ptr, 16, 0);
                 break;
             }
+
+            // wildcard
             case '%': {
                 vga_putchar('%');
                 break;
             }
+
+            // wildcard 2.0
             default: {
                 vga_putchar('%');
                 vga_putchar(*traverse);
@@ -87,6 +100,22 @@ void print(const char* format, ...) {
             }
         }
     }
+}
 
+/* 
+ * Pretty same to printf() in standart libc
+ *
+ * You can use %* for including variables into your print result
+ * %c - char
+ * %s - string
+ * %d - decimal
+ * %i - int
+ * %x - unsigned int
+ * %p - void
+ */
+void print(const char* format, ...) {
+    va_list parameters;
+    va_start(parameters, format);
+    vprint(format, parameters);
     va_end(parameters);
 }
