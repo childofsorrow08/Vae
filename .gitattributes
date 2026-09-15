@@ -1,0 +1,8 @@
+# Project languages
+*.c                     linguist-language=C
+*.asm                   linguist-language=Assembly
+
+# Project configurations and scripts
+*.cmake                 linguist-language=CMake
+
+# Third-party code
