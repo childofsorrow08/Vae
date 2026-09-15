@@ -6,8 +6,26 @@ include(cmake/prerequisites.cmake)
 project(kernel C ASM_NASM)
 
 add_executable(kernel 
+
+    # root
     "${CMAKE_SOURCE_DIR}/src/boot.asm"
     "${CMAKE_SOURCE_DIR}/src/kernel.c"
+
+    # boot
+    "${CMAKE_SOURCE_DIR}/src/boot/bss.asm"
+    "${CMAKE_SOURCE_DIR}/src/boot/gdt.asm"
+    "${CMAKE_SOURCE_DIR}/src/boot/long_jump.asm"
+    "${CMAKE_SOURCE_DIR}/src/boot/paging.asm"
+
+    # drivers
+    "${CMAKE_SOURCE_DIR}/src/drivers/vga.c"
+
+    # functions
+    "${CMAKE_SOURCE_DIR}/src/func/print.c"
+)
+
+target_include_directories(kernel PRIVATE
+    "${CMAKE_SOURCE_DIR}/src/include"
 )
 
 set_target_properties(kernel PROPERTIES
