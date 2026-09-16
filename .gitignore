@@ -10,3 +10,9 @@ test.sh
 rebuild.sh
 recruit.sh
 project_dump.txt
+
+# Kernel files (web/kernel/*)
+kernel.iso
+kernel.efi
+kernel.img
+kernel.bin
