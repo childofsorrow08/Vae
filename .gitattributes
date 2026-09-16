@@ -7,5 +7,6 @@
 
 # I don't want this in project statistic
 web/**                  linguist-vendored
+scripts/**              linguist-vendored
 
 # Third-party code
