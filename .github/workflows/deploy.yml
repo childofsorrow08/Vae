@@ -1,0 +1,49 @@
+name: Deploy oscore to GitHub Pages
+
+on:
+  push:
+    branches: [ "brighter-than-every-star" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            nasm \
+            grub-common \
+            grub-pc-bin \
+            xorriso \
+            dosfstools \
+            mtools
+
+      - name: Configure CMake and Build Kernel & ISO
+        run: |
+          cmake -B build -DBUILDISO=ON -DBUILDIMG=OFF -DBUILDBIN=OFF
+          cmake --build build
+
+      - name: Move generated ISO to web folder
+        run: |
+          cp build/kernel.iso web/kernel/kernel.iso
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'web'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

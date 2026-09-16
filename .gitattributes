@@ -5,4 +5,6 @@
 # Project configurations and scripts
 *.cmake                 linguist-language=CMake
 
+# I don't want this in project statistic
+
 # Third-party code

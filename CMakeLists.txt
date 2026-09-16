@@ -1,41 +1,40 @@
+# --------------------------- CMAKE ---------------------------
 cmake_minimum_required(VERSION 3.25)
-
-include(cmake/flags.cmake)
-include(cmake/prerequisites.cmake)
 project(kernel C ASM_NASM)
 
-add_executable(kernel 
-    # root
-    "${CMAKE_SOURCE_DIR}/src/boot/multiboot.asm"
-    "${CMAKE_SOURCE_DIR}/src/boot.asm"
-    "${CMAKE_SOURCE_DIR}/src/kernel.c"
+include(cmake/options/arch.cmake)
+include(cmake/options/targets.cmake)
 
-    # boot
-    "${CMAKE_SOURCE_DIR}/src/boot/bss.asm"
-    "${CMAKE_SOURCE_DIR}/src/boot/gdt.asm"
-    "${CMAKE_SOURCE_DIR}/src/boot/long_jump.asm"
-    "${CMAKE_SOURCE_DIR}/src/boot/paging.asm"
+include(cmake/prerequisites.cmake)
+include(cmake/flags.cmake)
 
-    # drivers
-    "${CMAKE_SOURCE_DIR}/src/drivers/port.c"
+# --------------------------- KERNEL ---------------------------
 
-    # functions
-    "${CMAKE_SOURCE_DIR}/src/func/sys_time.c"
-    
+include(cmake/source.cmake)
 
-    # deprecated because of framebuffer and multiboot2
-    #"${CMAKE_SOURCE_DIR}/src/drivers/vga.c"
-    #"${CMAKE_SOURCE_DIR}/src/func/print.c"
-    #"${CMAKE_SOURCE_DIR}/src/func/klog.c"
-)
-
-target_include_directories(kernel PRIVATE
-    "${CMAKE_SOURCE_DIR}/src/include"
+add_executable(kernel
+    ${ROOT_FOLDER_SOURCES}
+    ${BOOT_FOLDER_SOURCES}
 )
 
 set_target_properties(kernel PROPERTIES
-    LINK_FLAGS "-T ${CMAKE_CURRENT_SOURCE_DIR}/linker.ld -nostdlib"
+    LINK_FLAGS "-T ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ld/linker.ld -nostdlib"
     OUTPUT_NAME "kernel.elf"
 )
 
-include(cmake/iso.cmake)
+# --------------------------- BUILDING ---------------------------
+
+include(cmake/compile_info.cmake)
+include(cmake/compile_definitions.cmake)
+
+if(BUILDISO)
+    include(cmake/targets/iso.cmake)
+endif()
+
+if(BUILDIMG)
+    include(cmake/targets/img.cmake)
+endif()
+
+if(BUILDBIN)
+    include(cmake/targets/bin.cmake)
+endif()
