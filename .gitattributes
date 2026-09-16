@@ -6,5 +6,6 @@
 *.cmake                 linguist-language=CMake
 
 # I don't want this in project statistic
+web/**                  linguist-vendored
 
 # Third-party code
