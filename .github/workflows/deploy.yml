@@ -35,6 +35,10 @@ jobs:
           cmake -B build -DBUILDISO=ON -DBUILDIMG=OFF -DBUILDBIN=OFF
           cmake --build build
 
+      - name: Create kernel folder
+        run: |
+          mkdir -p web/kernel
+
       - name: Move generated ISO to web folder
         run: |
           cp build/kernel.iso web/kernel/kernel.iso
