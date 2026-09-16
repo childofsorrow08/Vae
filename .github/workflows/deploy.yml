@@ -32,16 +32,12 @@ jobs:
 
       - name: Configure CMake and Build Kernel & ISO
         run: |
-          cmake -B build -DBUILDISO=ON -DBUILDIMG=OFF -DBUILDBIN=OFF
+          cmake -B build -DBUILDISO=ON -DBUILDIMG=ON -DBUILDBIN=ON
           cmake --build build
 
-      - name: Create kernel folder
+      - name: Create kernel folder and move builded files
         run: |
-          mkdir -p web/kernel
-
-      - name: Move generated ISO to web folder
-        run: |
-          cp build/kernel.iso web/kernel/kernel.iso
+          scripts/update_web_kernel.sh
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
