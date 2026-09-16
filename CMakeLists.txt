@@ -1,12 +1,12 @@
 # --------------------------- CMAKE ---------------------------
 cmake_minimum_required(VERSION 3.25)
-project(kernel C ASM_NASM)
 
 include(cmake/options/arch.cmake)
 include(cmake/options/targets.cmake)
 
 include(cmake/prerequisites.cmake)
 include(cmake/flags.cmake)
+project(kernel C ASM_NASM)
 
 # --------------------------- KERNEL ---------------------------
 
