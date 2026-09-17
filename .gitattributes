@@ -8,6 +8,6 @@
 # I don't want this in project statistic
 web/**                      linguist-vendored
 scripts/**                  linguist-vendored
-src/include/resources/**    linguist-vendored
+**/resources/**             linguist-vendored
 
 # Third-party code
