@@ -1,4 +1,4 @@
-name: Deploy oscore to GitHub Pages
+name: Deploy Vae kernel to GitHub Pages
 
 on:
   push:
