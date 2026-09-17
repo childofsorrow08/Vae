@@ -15,6 +15,11 @@ include(cmake/source.cmake)
 add_executable(kernel
     ${ROOT_FOLDER_SOURCES}
     ${BOOT_FOLDER_SOURCES}
+    ${DRIVERS_FOLDER_SOURCES}
+)
+
+target_include_directories(kernel PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/include"
 )
 
 set_target_properties(kernel PROPERTIES

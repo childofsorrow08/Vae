@@ -12,9 +12,9 @@ align 8
         dw 5                         ; Framebuffer request
         dw 0                         ; Required
         dd 20                        ; Tag size
-        dd 1024                      ; Width
-        dd 768                       ; Height
-        dd 32                        ; BPP
+        dd 0                         ; Width
+        dd 0                         ; Height
+        dd 0                         ; BPP
 
         ; End tag
         align 8
