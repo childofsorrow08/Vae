@@ -13,6 +13,9 @@ project_dump.txt
 
 # Kernel files (web/kernel/*)
 kernel.iso
-kernel.efi
+kernel.elf
 kernel.img
 kernel.bin
+
+# don't ask
+UNKNOWN_CHAR_RENDER).h

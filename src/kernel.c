@@ -10,28 +10,6 @@
  
 #define FB
 #include <framebuffer.h>
-#include <resources/Venom-Snake-Render.h>
-
-void draw_venom_snake(int start_x, int start_y) {
-    if (!fb.addr) return;
-
-    for (int y = 0; y < VENOM_SNAKE_RENDER_HEIGHT; y++) {
-        if ((start_y + y) >= (int)fb.height) break;
-        if ((start_y + y) < 0) continue;
-
-        for (int x = 0; x < VENOM_SNAKE_RENDER_WIDTH; x++) {
-            if ((start_x + x) >= (int)fb.width) break;
-            if ((start_x + x) < 0) continue;
-
-            uint32_t color = Venom_Snake_Render[y * VENOM_SNAKE_RENDER_WIDTH + x];
-
-            if (color == 0x000000) continue;
-
-            uint32_t* pixel = (uint32_t*)((uint8_t*)fb.addr + (start_y + y) * fb.pitch) + (start_x + x);
-            *pixel = color;
-        }
-    }
-}
 
 void main(uint32_t mb_info_addr) {
     // framebuffer init
@@ -85,8 +63,6 @@ void main(uint32_t mb_info_addr) {
         "With the man who sold the world", 
     0xFFFFFFFF
     );
-
-    draw_venom_snake(500, 0);
 
     while (1) {
         __asm__ volatile("hlt");
