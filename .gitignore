@@ -9,6 +9,7 @@ build
 test.sh
 rebuild.sh
 recruit.sh
+project_dump.sh
 project_dump.txt
 
 # Kernel files (web/kernel/*)
