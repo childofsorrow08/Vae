@@ -1,8 +1,6 @@
 #include <stdint.h>
 #include <drivers/framebuffer.h>
 
-extern framebuffer_t fb;
-
 typedef struct {
     int x;
     int y;
@@ -62,4 +60,18 @@ void terminal_putc(char c) {
 
 void terminal_set_color(uint32_t color) {
     term.current_color = color;
+}
+
+void terminal_clear() {
+    if (!fb.addr) return;
+
+    uint32_t* dest = fb.addr;
+    int total_pixels = fb.height * (fb.pitch / 4);
+    
+    for (int i = 0; i < total_pixels; i++) {
+        dest[i] = 0x000000;
+    }
+
+    term.x = 10;
+    term.y = 10;
 }
