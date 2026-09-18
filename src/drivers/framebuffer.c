@@ -1,4 +1,4 @@
-#include <framebuffer.h>
+#include <drivers/framebuffer.h>
 #include <resources/font.h>
 
 framebuffer_t fb = {0};

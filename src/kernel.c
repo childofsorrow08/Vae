@@ -7,14 +7,25 @@
  * the Free Software Foundation, either version 3 of the License, or 
  * (at your option) any later version.
  */
- 
-#define FB
-#include <framebuffer.h>
+
+#include <drivers/framebuffer.h>
+#include <func/print.h>
+#include <helpers/print_build_info.h>
+
+void int_to_str(int n, char* buf) {
+    buf[0] = (n / 10) + '0';
+    buf[1] = (n % 10) + '0';
+    buf[2] = '\0';
+}
 
 void main(uint32_t mb_info_addr) {
     // framebuffer init
     fb_init(mb_info_addr);
-    
+
+    #if defined(BUILD_DATE) & defined(C_COMPILER_INFO) & defined(NASM_COMPILER_INFO) & defined(ARCH_NAME)
+        print_build_info();
+    #endif
+
     while (1) {
         __asm__ volatile("hlt");
     }

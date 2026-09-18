@@ -16,6 +16,8 @@ add_executable(kernel
     ${ROOT_FOLDER_SOURCES}
     ${BOOT_FOLDER_SOURCES}
     ${DRIVERS_FOLDER_SOURCES}
+    ${FUNC_FOLDER_SOURCES}
+    ${HELPERS_FOLDER_SOURCES}
 )
 
 target_include_directories(kernel PRIVATE
