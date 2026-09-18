@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [ "brighter-than-every-star" ]
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            nasm \
+            grub-common \
+            grub-pc-bin \
+            xorriso \
+            dosfstools \
+            mtools
+
+      - name: Configure
+        run: |
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Release ..
+
+      - name: Build
+        run: |
+          cmake --build build --config Release
+
+      - name: Tag
+        id: tag
+        run: |
+          TAG_NAME="v1.0.$(date +'%Y%m%d-%H%M%S')"
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+
+      - name: Publish
+        uses: softprops/action-release@v1
+        with:
+          tag_name: ${{ steps.tag.outputs.tag_name }}
+          draft: true
+          files: |
+            build/kernel.iso

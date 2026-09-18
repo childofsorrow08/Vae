@@ -1,7 +1,8 @@
 name: Deploy Vae kernel to GitHub Pages
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches: [ "brighter-than-every-star" ]
   workflow_dispatch:
 
@@ -12,6 +13,7 @@ permissions:
 
 jobs:
   build-and-deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

@@ -1,3 +1,5 @@
 include(${CMAKE_SOURCE_DIR}/cmake/source/root.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/source/boot.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/source/drivers.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/source/func.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/source/helpers.cmake)
