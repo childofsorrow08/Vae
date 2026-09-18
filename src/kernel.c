@@ -12,12 +12,6 @@
 #include <func/print.h>
 #include <helpers/print_build_info.h>
 
-void int_to_str(int n, char* buf) {
-    buf[0] = (n / 10) + '0';
-    buf[1] = (n % 10) + '0';
-    buf[2] = '\0';
-}
-
 void main(uint32_t mb_info_addr) {
     // framebuffer init
     fb_init(mb_info_addr);
