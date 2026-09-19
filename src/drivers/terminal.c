@@ -14,8 +14,6 @@ static terminal_cursor_t term = {
 };
 
 void terminal_scroll() {
-    if (!fb.addr) return;
-    
     int char_height = 16;     // 8x16
     uint32_t* dest = fb.addr;
     
@@ -36,8 +34,6 @@ void terminal_scroll() {
 }
 
 void terminal_putc(char c) {
-    if (!fb.addr) return;
-
     if (c == '\n') {
         term.x = 10;
         term.y += 16;
@@ -63,8 +59,6 @@ void terminal_set_color(uint32_t color) {
 }
 
 void terminal_clear() {
-    if (!fb.addr) return;
-
     uint32_t* dest = fb.addr;
     int total_pixels = fb.height * (fb.pitch / 4);
     

@@ -40,8 +40,6 @@ void fb_init(uint32_t mb_info_addr) {
 // --------------------------------------- 16x16 ---------------------------------------
 
 void draw_char_16x16(int x, int y, char c, uint32_t color) {
-    if (!fb.addr) return;
-    
     const uint16_t* glyph = font_data[(unsigned char)c];
 
     for (int cy = 0; cy < 16; cy++) {
@@ -74,8 +72,6 @@ void draw_string_16x16(int start_x, int start_y, const char* str, uint32_t color
 // --------------------------------------- 8x16 ---------------------------------------
 
 void draw_char_8x16(int x, int y, char c, uint32_t color) {
-    if (!fb.addr) return;
-    
     const uint16_t* glyph = font_data[(unsigned char)c];
 
     for (int cy = 0; cy < 16; cy++) {
