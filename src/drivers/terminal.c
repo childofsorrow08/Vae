@@ -13,6 +13,14 @@ static terminal_cursor_t term = {
     .current_color = 0xFFFFFF 
 };
 
+uint32_t terminal_get_x() {
+    return term.x;
+}
+
+uint32_t terminal_get_y() {
+    return term.y;
+}
+
 void terminal_scroll() {
     int char_height = 16;     // 8x16
     uint32_t* dest = fb.addr;

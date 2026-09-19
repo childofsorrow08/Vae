@@ -77,6 +77,7 @@ void draw_char_8x16(int x, int y, char c, uint32_t color) {
     for (int cy = 0; cy < 16; cy++) {
         uint16_t row = glyph[cy];
         for (int cx = 0; cx < 8; cx++) {
+            
             // reduce the size to 8x16
             // read every other bit
             if (row & (1 << (15 - (cx * 2)))) {
