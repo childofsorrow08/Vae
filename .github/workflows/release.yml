@@ -1,4 +1,4 @@
-name: Release
+name: Create a draft release
 
 on:
   pull_request:
@@ -8,7 +8,12 @@ on:
 
 jobs:
   release:
-    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      (github.event.pull_request.merged == true && 
+       !startsWith(github.event.pull_request.head.ref, 'docs/') && 
+       !startsWith(github.event.pull_request.head.ref, 'web/'))
+
     runs-on: ubuntu-latest
     permissions:
       contents: write
