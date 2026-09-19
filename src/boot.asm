@@ -19,25 +19,46 @@ section .text
     
     extern paging_init     
     extern stack_top
+    
+%ifidn ARCH_NAME, "i386"
 
-%ifidn ARCH_NAME, "x86_64"
+    extern gdt32
+    extern gdt32.pointer
+
+%elifidn ARCH_NAME, "x86_64"
+
     extern gdt64
     extern gdt64.pointer
     extern gdt64.code_selector
     extern long_jump
+
 %endif
 
-    _start32:
-        cli                      
-        mov esp, stack_top
+_start32:
+    cli
 
-        ; multiboot passes a pointer to the info to EBX
-        ; we'll pass it to _main
-        push ebx 
+    lgdt [gdt32.pointer]
+
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    mov ss, ax
+
+    jmp 0x08:.reload_cs
+
+    .reload_cs:
+    mov esp, stack_top
+
+    push ebx
 
 %ifidn ARCH_NAME, "i386"
+
         call main
+
 %elifidn ARCH_NAME, "x86_64"
+
         call paging_init
         call long_jump
 

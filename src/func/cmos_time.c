@@ -3,16 +3,12 @@
 #include <drivers/port.h>
 #include <func/cmos_time.h>
 
-static inline void outb(uint16_t port, uint8_t val) {
-    __asm__ volatile ("outb %0, %1" : : "a"(val), "Nd"(port));
-}
-
 // CMOS stores the time in binary-coded decimal format
 static uint8_t bcd_to_binary(uint8_t bcd) {
     return (bcd & 0x0F) + ((bcd / 16) * 10);
 }
 
-// Checking whether the CMOS is busy updating
+// checking whether the CMOS is busy updating
 static int cmos_updating_status(void) {
     outb(0x70, 0x0A);
     return (inb(0x71) & 0x80);
