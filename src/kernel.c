@@ -11,6 +11,7 @@
 #include <drivers/framebuffer.h>
 #include <func/print.h>
 #include <helpers/print_build_info.h>
+#include <drivers/keyboard.h>
 
 void main(uint32_t mb_info_addr) {
     // framebuffer init
@@ -21,6 +22,9 @@ void main(uint32_t mb_info_addr) {
     #endif
 
     while (1) {
-        __asm__ volatile("hlt");
+        keyboard_poll();
+
+        // disabled for some time
+        // __asm__ volatile("hlt");
     }
 }

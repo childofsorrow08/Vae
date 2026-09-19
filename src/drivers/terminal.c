@@ -34,23 +34,46 @@ void terminal_scroll() {
 }
 
 void terminal_putc(char c) {
-    if (c == '\n') {
-        term.x = 10;
-        term.y += 16;
-    } else if (c == '\r') {
-        term.x = 10;
-    } else {
-        if (term.x + 8 >= fb.width - 10) {
+    switch (c) {
+
+        // New line
+        case '\n':
             term.x = 10;
             term.y += 16;
-        }
-        
-        if (term.y + 16 >= fb.height - 10) {
-            terminal_scroll();
-        }
+            break;
 
-        draw_char_8x16(term.x, term.y, c, term.current_color);
-        term.x += 8;
+        // Carriage Return
+        case '\r':
+            term.x = 10;
+            break;
+
+        // Backspace
+        case '\b':
+            if (term.x > 10) {
+                term.x -= 8;
+                
+                for (int cy = 0; cy < 16; cy++) {
+                    for (int cx = 0; cx < 8; cx++) {
+                        uint32_t* pixel = (uint32_t*)((uint8_t*)fb.addr + (term.y + cy) * fb.pitch) + (term.x + cx);
+                        *pixel = 0x000000;
+                    }
+                }
+            }
+            break;
+
+        default:
+            if (term.x + 8 >= fb.width - 10) {
+                term.x = 10;
+                term.y += 16;
+            }
+            
+            if (term.y + 16 >= fb.height - 10) {
+                terminal_scroll();
+            }
+
+            draw_char_8x16(term.x, term.y, c, term.current_color);
+            term.x += 8;
+            break;
     }
 }
 
