@@ -22,8 +22,8 @@ If you want to build .iso, you also need this:
 
 1. Clone the repository and navigate to the project directory:
     ```bash
-    git clone <repository-url>
-    cd <repository-folder>
+    git clone https://github.com/childofsorrow08/Vae
+    cd Vae
     ```
 2. Create a build directory and run CMake:
     ```bash
