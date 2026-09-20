@@ -5,14 +5,33 @@ Developed as a hobby, as well as an opportunity to learn low-level programming a
 A monolithic kernel that will contain everything necessary for a minimal operating system. I’m not promising much, but I’ll keep adding features as long as I can and want to.
 
 # How to build:
+> Note: If you want to test this kernel, you can do this online [here](https://childofsorrow08.github.io/kernel/)!
 
 ## Dependencies:
-> Note: If you want to test this kernel, you can do this online [here](https://childofsorrow08.github.io/kernel/)!
-- CMake 3.25+
-- C compiler (GCC for Linux, currently unavailable for other OS)
-- [NASM compiler](https://www.nasm.us/)
 
-/TODO
+Main dependencies:
+- **CMake** 3.25+
+- **C compiler** (GCC for Linux, currently unavailable for other OS)
+- **NASM** compiler ([nasm.us](https://www.nasm.us/))
+
+If you want to build .iso, you also need this:
+- **GRUB**
+- **xorriso**
+
+## Building:
+
+1. Clone the repository and navigate to the project directory:
+    ```bash
+    git clone <repository-url>
+    cd <repository-folder>
+    ```
+2. Create a build directory and run CMake:
+    ```bash
+    mkdir build && cd build
+    cmake -DBUILDISO=ON ..
+    cmake --build .
+    ```
+> Note: You can see all compile options [here]().
 
 # Docs:
 
