@@ -22,4 +22,4 @@ A monolithic kernel that will contain everything necessary for a minimal operati
 ## User-related:
 
 ## Other:
-- [THANKS.md](docs/THANKS.md)a
+- [THANKS.md](docs/THANKS.md)
