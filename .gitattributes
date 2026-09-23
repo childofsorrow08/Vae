@@ -9,5 +9,6 @@
 web/**                      linguist-vendored
 scripts/**                  linguist-vendored
 **/resources/**             linguist-vendored
+*.nix                       linguist-vendored
 
 # Third-party code
