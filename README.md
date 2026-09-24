@@ -5,7 +5,7 @@ Developed as a hobby, as well as an opportunity to learn low-level programming a
 A monolithic kernel that will contain everything necessary for a minimal operating system. I’m not promising much, but I’ll keep adding features as long as I can and want to.
 
 # How to build:
-> Note: If you want to test this kernel, you can do this online [here](https://childofsorrow08.github.io/kernel/)!
+> Note: If you want to test this kernel, you can do this online [here](https://childofsorrow08.github.io/Vae/)!
 
 ## Dependencies:
 
