@@ -1,7 +1,7 @@
 ; There's a funny story about this:
 ; When I started writing a minimal keyboard driver and ran into a problem
 ; with the `hlt` instruction at the end of the kernel loop -
-; since I hadn’t implemented interrupts yet—the kernel essentially freezed
+; since I hadn’t implemented interrupts yet - the kernel essentially freezed
 ; after the `hlt` was executed. When I tried to implement interrupts,
 ; no matter how hard I tried, the kernel would freeze, and after spending almost
 ; the entire night working on interrupts, I realized that I had forgotten to
