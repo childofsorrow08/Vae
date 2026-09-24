@@ -24,9 +24,9 @@ void fb_init(uint32_t mb_info_addr) {
     struct multiboot_tag* tag = (struct multiboot_tag*)(uintptr_t)(mb_info_addr + 8);
 
     while (tag->type != 0) {
-        if (tag->type == 8) { // multiboot2 framebuffer tag = 2
+        if (tag->type == 8) { // multiboot2 framebuffer tag = 8
             struct multiboot_tag_framebuffer* fb_tag = (struct multiboot_tag_framebuffer*)tag;
-            
+
             fb.addr = (uint32_t*)(uintptr_t)fb_tag->framebuffer_addr;
             fb.width = fb_tag->framebuffer_width;
             fb.height = fb_tag->framebuffer_height;
@@ -56,7 +56,7 @@ void draw_char_16x16(int x, int y, char c, uint32_t color) {
 void draw_string_16x16(int start_x, int start_y, const char* str, uint32_t color) {
     int x = start_x;
     int y = start_y;
-    
+
     while (*str) {
         if (*str == '\n') {
             x = start_x;
@@ -77,7 +77,7 @@ void draw_char_8x16(int x, int y, char c, uint32_t color) {
     for (int cy = 0; cy < 16; cy++) {
         uint16_t row = glyph[cy];
         for (int cx = 0; cx < 8; cx++) {
-            
+
             // reduce the size to 8x16
             // read every other bit
             if (row & (1 << (15 - (cx * 2)))) {
@@ -91,7 +91,7 @@ void draw_char_8x16(int x, int y, char c, uint32_t color) {
 void draw_string_8x16(int start_x, int start_y, const char* str, uint32_t color) {
     int x = start_x;
     int y = start_y;
-    
+
     while (*str) {
         if (*str == '\n') {
             x = start_x;
