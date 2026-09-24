@@ -1,15 +1,20 @@
+; This file needed only for x86_64 build
+; of this kernel, cuz it's literally jump to
+; x86_64 mode
+
 [BITS 32]
+
 section .text
     global long_jump
 
-    extern page_pml4
+    extern _x86_64_page_pml4
 
     long_jump:
         mov eax, cr4
         or eax, 1 << 5
         mov cr4, eax
 
-        mov eax, page_pml4
+        mov eax, _x86_64_page_pml4
         mov cr3, eax
 
         mov ecx, 0xC0000080

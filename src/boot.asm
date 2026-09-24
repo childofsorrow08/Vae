@@ -1,9 +1,9 @@
 ; Copyright (C) 2026 Child of Sorrow
-; 
+;
 ; This file is part of VAE kernel.
-; VAE kernel is free software: you can redistribute it and/or modify 
-; it under the terms of the GNU General Public License as published by 
-; the Free Software Foundation, either version 3 of the License, or 
+; VAE kernel is free software: you can redistribute it and/or modify
+; it under the terms of the GNU General Public License as published by
+; the Free Software Foundation, either version 3 of the License, or
 ; (at your option) any later version.
 
 [BITS 32]
@@ -16,20 +16,24 @@ section .text
     global _start32
 
     extern main
-    
-    extern paging_init     
-    extern stack_top
-    
+
 %ifidn ARCH_NAME, "i386"
 
-    extern gdt32
-    extern gdt32.pointer
+    extern _i386_paging_init
+    extern _i386_stack_top
+
+    extern _i386_gdt
+    extern _i386_gdt.pointer
 
 %elifidn ARCH_NAME, "x86_64"
 
-    extern gdt64
-    extern gdt64.pointer
-    extern gdt64.code_selector
+    extern _x86_64_paging_init
+    extern _x86_64_stack_top
+
+    extern _x86_64_gdt
+    extern _x86_64_gdt.pointer
+    extern _x86_64_gdt.code_selector
+
     extern long_jump
 
 %endif
@@ -37,7 +41,11 @@ section .text
 _start32:
     cli
 
-    lgdt [gdt32.pointer]
+%ifidn ARCH_NAME, "i386"
+    lgdt [_i386_gdt.pointer]
+%elifidn ARCH_NAME, "x86_64"
+    lgdt [_x86_64_gdt.pointer]
+%endif
 
     mov ax, 0x10
     mov ds, ax
@@ -49,21 +57,26 @@ _start32:
     jmp 0x08:.reload_cs
 
     .reload_cs:
-    mov esp, stack_top
+%ifidn ARCH_NAME, "i386"
+    mov esp, _i386_stack_top
+%elifidn ARCH_NAME, "x86_64"
+    mov esp, _x86_64_stack_top
+%endif
 
     push ebx
 
 %ifidn ARCH_NAME, "i386"
 
+        call _i386_paging_init
         call main
 
 %elifidn ARCH_NAME, "x86_64"
 
-        call paging_init
+        call _x86_64_paging_init
         call long_jump
 
-        lgdt [gdt64.pointer]
-        jmp gdt64.code_selector:_start64
+        lgdt [_x86_64_gdt.pointer]
+        jmp _x86_64_gdt.code_selector:_start64
 
 [BITS 64]
     _start64:
@@ -78,7 +91,7 @@ _start32:
         pop rdi
 
         call main
-%endif 
+%endif
 
     .hang:
         cli

@@ -1,19 +1,19 @@
 [BITS 32]
 section .multiboot
-align 8
+    align 8
     header_start:
-        dd 0xE85250D6                                       ; Multiboot2 magic number
+        dd 0xE85250D6                                       ; multiboot2 magic number
         dd 0                                                ; 0 = 32 bit
-        dd header_end - header_start                        ; Header length
-        dd -(0xE85250D6 + 0 + (header_end - header_start))  ; Checksum
+        dd header_end - header_start                        ; header length
+        dd -(0xE85250D6 + 0 + (header_end - header_start))  ; checksum
 
         ; Framebuffer request tag
         align 8
-        dw 5                         ; Framebuffer request
-        dw 0                         ; Required
-        dd 20                        ; Tag size
-        dd 0                         ; Width
-        dd 0                         ; Height
+        dw 5                         ; framebuffer request
+        dw 0                         ; required
+        dd 20                        ; tag size
+        dd 0                         ; width
+        dd 0                         ; height
         dd 0                         ; BPP
 
         ; End tag
