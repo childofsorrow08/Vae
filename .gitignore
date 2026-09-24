@@ -1,5 +1,6 @@
 # build
 build
+build64
 .cache
 
 # VSCode
@@ -11,9 +12,15 @@ build
 
 # helpful scripts, but helpful for me only
 test.sh
+nix_test.sh
+nix_test64.sh
+qemu.log
+
 rebuild.sh
 recruit.sh
+
 project_dump.sh
+nix_project_dump.sh
 project_dump.txt
 
 # Kernel files (web/kernel/*)
