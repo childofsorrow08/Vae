@@ -23,7 +23,8 @@ hidden
 qemu.log
 
 # Kernel files (web/kernel/*)
-kernel.iso
 kernel.elf
+kernel.efi
+kernel.iso
 kernel.img
 kernel.bin
