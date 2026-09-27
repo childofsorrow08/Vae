@@ -11,17 +11,18 @@ ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 include $(ROOT_DIR)/make/directories.mk
 include $(MAKE_CFG_DIR)/prerequisites.mk
 
-# Sources and definitions
-include $(MAKE_CFG_DIR)/bare_sources.mk
-include $(MAKE_CFG_DIR)/multiboot_sources.mk
+# Definitions and sources
+include $(MAKE_CFG_DIR)/sources.mk
+include $(MAKE_CFG_DIR)/toolchain.mk
 include $(MAKE_CFG_DIR)/definitions.mk
 include $(MAKE_CFG_DIR)/flags.mk
 
 # Now we can build our targets
-include $(TARGETS_DIR)/x32.mk
+include $(TARGETS_DIR)/uefi_x32.mk
 include $(TARGETS_DIR)/multiboot_x32.mk
-include $(TARGETS_DIR)/x64.mk
+include $(TARGETS_DIR)/uefi_x64.mk
 include $(TARGETS_DIR)/multiboot_x64.mk
+all: efi32 elf32 #efi64 elf64
 
 # May be needed
 include $(TARGETS_DIR)/clean_x32.mk
