@@ -14,7 +14,7 @@
 pkgs.mkShell {
     buildInputs = with pkgs; [
         # Compiler
-        gcc
+        pkgsCross.i686-embedded.buildPackages.gcc
 
         # Development tools
         cmake
