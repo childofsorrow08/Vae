@@ -22,7 +22,7 @@ include $(TARGETS_DIR)/uefi_x32.mk
 include $(TARGETS_DIR)/multiboot_x32.mk
 include $(TARGETS_DIR)/uefi_x64.mk
 include $(TARGETS_DIR)/multiboot_x64.mk
-all: efi32 elf32 #efi64 elf64
+all: uefi32 multiboot32
 
 # May be needed
 include $(TARGETS_DIR)/clean_x32.mk
