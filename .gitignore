@@ -1,6 +1,10 @@
 # build
 build
+build32
 build64
+
+binary32
+binary64
 
 # IDE
 .cache
