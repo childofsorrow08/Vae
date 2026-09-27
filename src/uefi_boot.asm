@@ -7,8 +7,8 @@
 ; (at your option) any later version.
 
 [BITS 32]
-section .multiboot_start
-	global _multiboot_start32
+section .uefi_boot
+	global _uefi_start32
 
-_multiboot_start32:
+_uefi_start32:
 	cli
