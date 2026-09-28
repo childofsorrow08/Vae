@@ -5,7 +5,7 @@ uefi32: $(COMMON_NASM_SOURCES)
 uefi32: $(COMMON_C_SOURCES)
 
 uefi32:
-	@echo "[INFO] Building UEFI x32 application"
+	@echo "[INFO] Building x32 .efi binary"
 	@mkdir -p $(32_BUILD_DIR)
 
 	@$(AS) 	$(COMMON_ASFLAGS) 						\
