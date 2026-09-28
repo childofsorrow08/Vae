@@ -9,3 +9,7 @@ SRC_DIR := $(ROOT_DIR)/src
 
 UEFI_LINKER := $(MAKE_CFG_DIR)/linker/linker_uefi.ld
 MULTIBOOT_LINKER := $(MAKE_CFG_DIR)/linker/linker_multiboot.ld
+
+X32_ISO_IMG := $(32_BINARY_DIR)/kernel.iso
+X32_ISO_DIR := $(32_BUILD_DIR)/iso
+GRUB_CFG := $(MAKE_CFG_DIR)/grub/grub.cfg
