@@ -9,6 +9,6 @@ $(32_BINARY_DIR)/kernel.elf: $(32_BUILD_DIR)/kernel.elf
 $(32_BUILD_DIR)/kernel.elf: $(MULTIBOOT_ALL_OBJS)
 	@echo "[INFO] Linking x32 .elf binary"
 	@mkdir -p $(32_BUILD_DIR)
-	@$(CC)  -m32 -nostdlib -T $(UEFI_LINKER)        \
-	        $(MULTIBOOT_ALL_OBJS)                   \
+	@$(CC)  -m32 -nostdlib -T $(MULTIBOOT_LINKER)        	\
+	        $(MULTIBOOT_ALL_OBJS)                 		  	\
 	        -o $@
