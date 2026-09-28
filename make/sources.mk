@@ -10,8 +10,9 @@ UEFI_ASM_SOURCES :=			\
 UEFI_C_SOURCES :=		\
 	# none
 
-MULTIBOOT_ASM_SOURCES :=	\
-	$(SRC_DIR)/multiboot.asm
+MULTIBOOT_ASM_SOURCES :=					\
+	$(SRC_DIR)/multiboot.asm				\
+	$(SRC_DIR)/boot/multiboot_header.asm
 
 MULTIBOOT_C_SOURCES :=		\
 	# none
