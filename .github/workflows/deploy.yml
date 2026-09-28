@@ -14,7 +14,7 @@ permissions:
 jobs:
   build-and-deploy:
     if: |
-      github.event_name == 'workflow_dispatch' || 
+      github.event_name == 'workflow_dispatch' ||
       (github.event.pull_request.merged == true && !startsWith(github.event.pull_request.head.ref, 'docs/'))
 
     runs-on: ubuntu-latest
@@ -35,14 +35,9 @@ jobs:
             dosfstools \
             mtools
 
-      - name: Configure CMake and Build Kernel & ISO
+      - name: Build Kernel & ISO
         run: |
-          cmake -B build -DBUILDISO=ON -DBUILDIMG=ON -DBUILDBIN=ON
-          cmake --build build
-
-      - name: Create kernel folder and move builded files
-        run: |
-          scripts/update_web_kernel.sh
+          make webkernel
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -9,15 +9,15 @@ on:
 jobs:
   release:
     if: |
-      github.event_name == 'workflow_dispatch' || 
-      (github.event.pull_request.merged == true && 
-       !startsWith(github.event.pull_request.head.ref, 'docs/') && 
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.pull_request.merged == true &&
+       !startsWith(github.event.pull_request.head.ref, 'docs/') &&
        !startsWith(github.event.pull_request.head.ref, 'web/'))
 
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,15 +35,9 @@ jobs:
             dosfstools \
             mtools
 
-      - name: Configure
-        run: |
-          mkdir build
-          cd build
-          cmake -DCMAKE_BUILD_TYPE=Release ..
-
       - name: Build
         run: |
-          cmake --build build --config Release
+          make release
 
       - name: Tag
         id: tag
@@ -57,4 +51,4 @@ jobs:
           tag_name: ${{ steps.tag.outputs.tag_name }}
           draft: true
           files: |
-            build/kernel.iso
+            build/*
