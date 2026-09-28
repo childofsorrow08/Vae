@@ -28,6 +28,6 @@ uefi32:
 		--set-section-flags .bss=alloc,load,contents \
 		-O pei-i386 $(32_BUILD_DIR)/not_yet_kernel.elf $(32_BUILD_DIR)/kernel.efi
 
-	rm -rf $(32_BINARY_DIR)
+	rm -rf $(32_BINARY_DIR)/kernel.efi
 	@mkdir -p $(32_BINARY_DIR)
 	@mv $(32_BUILD_DIR)/kernel.efi $(32_BINARY_DIR)/kernel.efi
