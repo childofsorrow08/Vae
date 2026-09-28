@@ -13,16 +13,21 @@ include $(MAKE_CFG_DIR)/prerequisites.mk
 
 # Definitions and sources
 include $(MAKE_CFG_DIR)/sources.mk
+include $(MAKE_CFG_DIR)/objects.mk
 include $(MAKE_CFG_DIR)/toolchain.mk
 include $(MAKE_CFG_DIR)/definitions.mk
 include $(MAKE_CFG_DIR)/flags.mk
+
+# Templates to compile objs
+include $(MAKE_CFG_DIR)/rules/x32_asm.mk
+include $(MAKE_CFG_DIR)/rules/x32_c.mk
 
 # Now we can build our targets
 include $(TARGETS_DIR)/uefi_x32.mk
 include $(TARGETS_DIR)/multiboot_x32.mk
 include $(TARGETS_DIR)/uefi_x64.mk
 include $(TARGETS_DIR)/multiboot_x64.mk
-all: uefi32 multiboot32
+all: efi32 elf32
 
 # May be needed
 include $(TARGETS_DIR)/clean_x32.mk
